@@ -87,24 +87,24 @@ class MBSAC(PPO):
            This is the focus of the paper.
         2. An ensemble neural network based SAC that was used in https://arxiv.org/abs/1906.08253
            and adapted from the original repo https://github.com/Xingyu-Lin/mbpo_pytorch/
-        
+
         Based on our experiments with both, we found 1. to be much more sample efficient
         and effective for the gate control problems presented in the paper. So that will
         be the focus our repo too. However, the ensemble NN functionality is still provided
         in case it might be relevant to someone.
 
-        Coming back to the LH-MBSAC, we equip the model-fee off-policy algorithm 
-        with a Learnable ODE to exploit a strong and correct inductive bias for 
-        the dynamics of the system in order to sample-efficiently learn an effective 
+        Coming back to the LH-MBSAC, we equip the model-fee off-policy algorithm
+        with a Learnable ODE to exploit a strong and correct inductive bias for
+        the dynamics of the system in order to sample-efficiently learn an effective
         model of the controllable system.
-        
+
         Some features of this module are inherited from `PPO` and both are children
-        of `BaseOpt` that stores common cost and evolution functions. 
+        of `BaseOpt` that stores common cost and evolution functions.
         This class is the center of all the code in this repo and the main contribution
         of the paper. So all the pieces fit together here.
         There are quite a few parameters but most of them of the SAC specific ones can
-        be ignored as their values were obtained through hyperparameter tuning. 
-        
+        be ignored as their values were obtained through hyperparameter tuning.
+
 
         Parameters
         ----------
@@ -114,7 +114,7 @@ class MBSAC(PPO):
         use_decay : Optional[bool], optional
             Use a decaying loss function in the NN-based model, by default False
         rollout_batch_size : Optional[int], optional
-            Size of the training data or MDP instances to perform a k-branch rollout 
+            Size of the training data or MDP instances to perform a k-branch rollout
             on, by default 9000
         model_retain_epochs : Optional[int], optional
             For how many consecutive epochs should the model be used, by default 1
@@ -125,13 +125,13 @@ class MBSAC(PPO):
         replay_size : int, optional
             Size of the replay buffer, by default 1000000
         max_path_length : Optional[int], optional
-            Maximum length of the MDP transition trajectory. 
+            Maximum length of the MDP transition trajectory.
             Deprecated or not useful in the LH-MBSAC context, by default 1000
         network_size : Optional[int], optional
             Ensemble size if multiple models are evolved at once, by default 7
             Deprecated if LH-MBSAC is used. Then the number of models is by default 1.
         elite_size : Optional[int], optional
-            Part of PETS, subset size of models to use to make 
+            Part of PETS, subset size of models to use to make
             model predictions, by default 5
         automatic_entropy_tuning : Optional[bool], optional
             use autodiff to train the temperature parameter in SAC, by default True
@@ -154,14 +154,14 @@ class MBSAC(PPO):
         model_train_iterations : Optional[int], optional
             number of gradient descent steps to train the model, by default 10
         imperfection_delta : float, optional
-            Distance of the guess Hamiltonian to the truth in terms of 
+            Distance of the guess Hamiltonian to the truth in terms of
             mean squared error of the Pauli basis coefficients, by default 0.1
         imperfection_ftol : Optional[float], optional
-            Deprecated/uninteresting. equivalent of `imperfection_delta` but 
+            Deprecated/uninteresting. equivalent of `imperfection_delta` but
             in terms of average fidelity deficit between the true annd guess
             Hamiltonian, by default 0.1
         diff_thru_model : Optional[bool], optional
-            flag to try autodiffing all timesteps instead of just 1. 
+            flag to try autodiffing all timesteps instead of just 1.
             Experimental, by default False
         reset_rate_epochs : Optional[int], optional
             number of epochs to go before re-initializing the policy and value functions
@@ -170,7 +170,7 @@ class MBSAC(PPO):
             flag to turn on resetting the policy and value functions, by default False
         use_ruthless_delta : Optional[bool], optional
             perturb all the coefficients of the ansatz Hamiltonian in the model
-            when initializing with some `imperfection_delta` distance 
+            when initializing with some `imperfection_delta` distance
             from truth, by default True
         use_shots_to_recon_state : Optional[bool], optional
             add shot noise to the state observations, by default False
@@ -189,11 +189,11 @@ class MBSAC(PPO):
             flag to start learning the time-dependent control Hamiltonian
             in the system, by default False
         buffer_size : Optional[int], optional
-            Environment buffer size or number of samples randomly observed 
-            during the initial exploration stage. See Algorithm 2 in the 
+            Environment buffer size or number of samples randomly observed
+            during the initial exploration stage. See Algorithm 2 in the
             paper, by default 2000
         override_ham_init : Optional[bool], optional
-            Whether to override system Hamiltonian initialization with saved random/or 
+            Whether to override system Hamiltonian initialization with saved random/or
             other values, by default False
         learn_time_dep_ham : Optional[bool], optional
             Start learning the time dependent Hamiltonian using a ZOH like method.
@@ -362,7 +362,7 @@ class MBSAC(PPO):
         self.max_fid_seen = 0
         self.max_fid_est = 0
         self.max_ep_ret = 0
-    
+
     def resize_model_pool(self, rollout_length, model_pool):
         model_steps_per_epoch = int(rollout_length * self.rollouts_per_epoch)
         new_pool_size = self.model_retain_epochs * model_steps_per_epoch

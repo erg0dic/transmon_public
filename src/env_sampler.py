@@ -29,7 +29,7 @@ class EnvSampler:
         num_timesteps=None,
         set_actions_to_zero=False,
     ):
-        
+
         if self.current_state is None:
             self.current_state = self.env.reset()
         ## modify for use_shots_to_recon_state
