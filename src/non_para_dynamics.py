@@ -641,37 +641,40 @@ class LearnableHamEnsembleDynamicsModel:
         improv_threshold: Optional[float] = 0.01,
     ) -> Tuple[List, List, List]:
         """
-        _summary_
+        Method to train the Learnable Hamiltonian module.
 
         Parameters
         ----------
         inputs : np.ndarray
-            _description_
+            MDP data (state, action)
         labels : np.ndarray
-            _description_
+            MDP data labels (next_state, reward)
         batch_size : Optional[int], optional
-            _description_, by default 256
+            gradient descent batch size, by default 256
         holdout_ratio : Optional[float], optional
-            _description_, by default 0.2
+            ratio of training data to use for validation, by default 0.2
         max_epochs_since_update : Optional[int], optional
-            _description_, by default 5
+            epoch tolerance window during which if the validation loss 
+            does not improve by `improve_threshold` then the
+            training is quit, by default 5
         epochs : Optional[int], optional
-            _description_, by default 20
+            number of training descent steps, by default 20
         data_scaling_exp : Optional[bool], optional
-            _description_, by default False
+            data scaling experiment flag, by default False
         custom_holdouts : Optional[torch.Tensor], optional
-            _description_, by default None
+            add a custom validation dataset, by default None
         use_full_dataset : Optional[bool], optional
-            _description_, by default False
+            Dummy?, need to refactor, by default False
         timesteps : Optional[torch.IntTensor], optional
-            _description_, by default None
+            timesteps or times corresponding to each control pulse action, 
+            by default None
         improv_threshold : Optional[float], optional
-            _description_, by default 0.01
+            improvement threshold for early termination of training/gradient descent, by default 0.01
 
         Returns
         -------
         Tuple[List, List, List]
-            _description_
+            Per epoch training losses, validation losses, Hamiltonian distance or \delta losses
         """
         self._max_epochs_since_update = max_epochs_since_update
         self._epochs_since_update = 0
