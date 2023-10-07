@@ -1,6 +1,6 @@
 # transmon
 
-Code for the paper [Sample-efficient Model-based Reinforcement Learning for Quantum Control](https://arxiv.org/pdf/2304.09718.pdf).
+Code for the paper [Sample-efficient Model-based Reinforcement Learning for Quantum Control](https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.5.043002).
 
 
 ## Installation
@@ -21,10 +21,18 @@ The model-based policy optimization algorithm in the repo that was introduced in
 ## Cite
 If you use this code, please cite the following paper:
 ```
-@article{khalid2023sample,
-  title={Sample-efficient Model-based Reinforcement Learning for Quantum Control},
-  author={Irtaza Khalid and Carrie A. Weidner and Edmond A. Jonckheere and Sophie G. Shermer and Frank C. Langbein},
-  journal={arXiv preprint arXiv:2304.09718},
-  year={2023}
+@article{PhysRevResearch.5.043002,
+  title = {Sample-efficient model-based reinforcement learning for quantum control},
+  author = {Khalid, Irtaza and Weidner, Carrie A. and Jonckheere, Edmond A. and Schirmer, Sophie G. and Langbein, Frank C.},
+  journal = {Phys. Rev. Res.},
+  volume = {5},
+  issue = {4},
+  pages = {043002},
+  numpages = {21},
+  year = {2023},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevResearch.5.043002},
+  url = {https://link.aps.org/doi/10.1103/PhysRevResearch.5.043002}
 }
+
 ```
